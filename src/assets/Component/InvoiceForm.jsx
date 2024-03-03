@@ -5,18 +5,13 @@ import { customers, suppliers } from '../page/mockData';
 import CustomTable from './CustomTable';
 
 const SharedInvoiceForm = ({ formType }) => {
-  const { control, handleSubmit } = useForm();
+  const { control } = useForm();
   const [entityId, setEntityId] = useState('');
   const [entityName, setEntityName] = useState('');
   const [matchingEntities, setMatchingEntities] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
   const [totalAmount, setTotalAmount] = useState('');
   const [showCustomTable, setShowCustomTable] = useState(false);
-
-  const onSubmit = (data) => {
-    console.log(data);
-    setShowCustomTable(true);
-  };
 
   const handleEntityIdChange = (event) => {
     const enteredId = event.target.value.toUpperCase();
@@ -65,23 +60,22 @@ const SharedInvoiceForm = ({ formType }) => {
   const handleConfirmCancel = () => {
     setEntityId('');
     setEntityName('');
-    setSelectedDate('dd/mm/yyy');
+    setSelectedDate('');
     setTotalAmount('');
     setShowCustomTable(false);
   };
 
   return (
-    <Box sx={{ maxWidth: 950, margin: 'auto', mt: 2 }} component="form" onSubmit={handleSubmit(onSubmit)}>
+    <Box sx={{ maxWidth: 950, margin: 'auto', mt: 2 }} component="form">
       <Typography variant="h6" gutterBottom sx={{ textAlign: 'left', margin: '20px 0 40px' }}>
         {formType === 'customer' ? 'Đơn Bán Hàng' : 'Đơn Mua Hàng'}
       </Typography>
 
       <Grid container rowSpacing={2} columnSpacing={10}>
         {/* Mã khách hàng/nhà cung cấp */}
-        <Grid item container spacing={2} alignItems="right" xs={4} sm={6}>
+        <Grid item container spacing={4} alignItems="right" xs={4} sm={6}>
           <Grid item xs={4}>
-            <Typography variant="body2" gutterBottom 
-            style={{borderBottom:'1px dotted #EEEEEE', paddingBottom:'11px'}}>
+            <Typography variant="subtitle1" gutterBottom>
               Mã {formType === 'customer' ? 'khách hàng' : 'nhà cung cấp'}
             </Typography>
           </Grid>
@@ -115,8 +109,7 @@ const SharedInvoiceForm = ({ formType }) => {
         {/* Ngày chứng từ */}
         <Grid item container spacing={2} alignItems="center" xs={4} sm={6}>
           <Grid item xs={4}>
-            <Typography variant="body2" gutterBottom
-             style={{borderBottom:'1px dotted #EEEEEE', paddingBottom:'11px'}}>
+            <Typography variant="subtitle1" gutterBottom>
               Ngày chứng từ
             </Typography>
           </Grid>
@@ -142,10 +135,9 @@ const SharedInvoiceForm = ({ formType }) => {
           </Grid>
         </Grid>
         {/* Tên khách hàng/nhà cung cấp */}
-        <Grid item container spacing={2} alignItems="center" xs={4} sm={6}>
+        <Grid item container spacing={4} alignItems="center" xs={4} sm={6}>
           <Grid item xs={4}>
-            <Typography variant="body2" gutterBottom
-              style={{borderBottom:'1px dotted #EEEEEE', paddingBottom:'11px'}}>
+            <Typography variant="subtitle1" gutterBottom>
               Tên {formType === 'customer' ? 'Khách Hàng' : 'Nhà Cung Cấp'}
             </Typography>
           </Grid>
@@ -158,12 +150,11 @@ const SharedInvoiceForm = ({ formType }) => {
             />
           </Grid>
         </Grid>
-
+        
         {/* Tổng tiền */}
-        <Grid item container spacing={2} alignItems="center" xs={4} sm={6}>
+        <Grid item container spacing={4} alignItems="center" xs={4} sm={6}>
           <Grid item xs={4}>
-            <Typography variant="body2" gutterBottom
-              style={{borderBottom:'1px dotted #EEEEEE', paddingBottom:'11px'}}>
+            <Typography variant="subtitle1" gutterBottom>
               Tổng tiền
             </Typography>
           </Grid>
